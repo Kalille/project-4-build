@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles";
 
@@ -11,11 +11,14 @@ function NavBar({ user, setUser }) {
       }
     });
   }
-
+  const username = user.username
   return (
+  
     <Wrapper>
+   {`Welcome Back ${username}`}
       <Logo>
-        <Link to="/">Reciplease</Link>
+     
+        <Link to="/">Comic Kraze </Link>
       </Logo>
       <Nav>
         <Button as={Link} to="/new">
@@ -25,6 +28,17 @@ function NavBar({ user, setUser }) {
           Logout
         </Button>
       </Nav>
+      <NavLink
+           to='/'
+           
+          //  style={link}
+           activestyle={{
+               color: 'gray',
+               fontWeight: "bold"
+           }}
+           >
+              Home
+           </NavLink>
     </Wrapper>
   );
 }
@@ -34,12 +48,13 @@ const Wrapper = styled.header`
   justify-content: center;
   align-items: center;
   padding: 8px;
+  background: linear-gradient(blue)
 `;
 
 const Logo = styled.h1`
   font-family: "Permanent Marker", cursive;
   font-size: 3rem;
-  color: deeppink;
+  color:  blue;
   margin: 0;
   line-height: 1;
 
