@@ -2,15 +2,19 @@ Rails.application.routes.draw do
   
   namespace :api do
     resources :users
-    resources :comics, only: [:index, :create]
+    resources :comics, only: [:index, :create, :show]
     resources :comments 
+    # resources :comic_apis, only: [:index, :show]
     resources :recipes, only: [:index, :create]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
-    get "/allcomics", to: "comic_apis#search_comics"
+    # get "/allcomics", to: "comic_apis#search_comics"
     get "/character", to: "comic_apis#search_characters"
+    get "/allcomics", to: "comic_apis#index"
+    get "/show/:id", to: "comic_apis#show"
+    post "/comments", to: "comments#create"
   end
 
   # all other routes will be load our React application

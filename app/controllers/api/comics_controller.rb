@@ -2,20 +2,27 @@ class Api::ComicsController < ApplicationController
     skip_before_action :authorize, only: :index
 
     def index
-        render json: Comic.all, include: :comments
+        render json: Comic.all, include: [:comments, :users]
       end
       def create
         comic = Comic.create(comic_params)
+        byebug
         render json: comic, status: :created
       end
 
       def show 
-        comic = Comic.find_by(name: params[:name])
-        render json: comic 
+        comic = Comic.find_by(id: params[:id])
+        render json: comic, include: [:comments, :users]
+      end
+
+      def destroy
+        comic = Comic.find_by(id: params[:id])
+        comic.delete
+        head :no_content
       end
       private
 
     def comic_params
-        params.permit(:name)
+        params.require(:comic).permit(:name, :release_year, :publisher, :image, :issue_number, :count_of_issues, :creator)
     end
 end

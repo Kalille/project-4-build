@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
   skip_before_action :authorize, only: [:create, :index]
   def index
-    render json: User.all, include: :created_comics
+    render json: User.all
   end
   def create
     user = User.create!(user_params)
@@ -10,7 +10,9 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+   
     render json: @current_user
+  
   end
 
   private

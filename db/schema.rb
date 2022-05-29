@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_17_171422) do
+ActiveRecord::Schema.define(version: 2022_05_18_021415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comic_apis", force: :cascade do |t|
+    t.string "name"
+    t.string "release_year"
+    t.string "publisher"
+    t.string "image"
+    t.string "issue_number"
+    t.string "count_of_issues"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "comics", force: :cascade do |t|
     t.string "name"
@@ -38,16 +49,6 @@ ActiveRecord::Schema.define(version: 2022_05_17_171422) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "recipes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "title"
-    t.text "instructions"
-    t.integer "minutes_to_complete"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_recipes_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -57,5 +58,4 @@ ActiveRecord::Schema.define(version: 2022_05_17_171422) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "recipes", "users"
 end

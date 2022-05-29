@@ -5,32 +5,46 @@ import Login from "../pages/Login";
 import RecipeList from "../pages/RecipeList";
 import NewRecipe from "../pages/NewRecipe";
 import 'bootstrap/dist/css/bootstrap.css'
+import ComicShowPage from "../pages/ComicShowPage";
+import MyPage from "../pages/MyPage";
+// import CommentsPage from "../pages/CommentsPage";
+import MySelection from "../pages/MySelection";
+import Home from "../pages/Home";
+import EditCommentPage from "../pages/EditCommentPage";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [comics,setComics]=useState('')
+  const [comics,setComics]=useState('');
+  const [comments,setComments]=useState('')
   const key = "4b22c0361638acf814a29e4ebfbf3825d63abf6a"
 
   const url =`https://comicvine.gamespot.com/api/volumes/?api_key=${key}&format=json&sort=name:asc&filter=name:Walking%20Dead`
-  // https://comicvine.gamespot.com/api/volumes/?api_key=4b22c0361638acf814a29e4ebfbf3825d63abf6a&format=json&sort=name:asc&filter=name:Walking%20Dead
 
-useEffect(()=>{
 
-  fetch('/api/comics')
-  .then(res=>res.json())
-  // .then(res=>console.log(res.results))
-  .then(r=>setComics(r))
-},[])
-
-console.log(comics)
   useEffect(() => {
-    // auto-login
     fetch("/api/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
     });
   }, []);
+  useEffect(() => {
+   
+    fetch("/api/comments").then((r) => {
+      if (r.ok) {
+        r.json().then((comment) => setComments(comment));
+      }
+    });
+  }, []);
+  useEffect(() => {
+   
+    fetch("/api/comics").then((r) => {
+      if (r.ok) {
+        r.json().then((comic) => setComics(comic));
+      }
+    });
+  }, []);
+  // console.log(comics)
 
   if (!user) return <Login onLogin={setUser} />;
 
@@ -38,32 +52,26 @@ console.log(comics)
     <>
       <NavBar user={user} setUser={setUser} />
       <main>
-        Hello
-       {/* {comics ? comics.results.map((comic, i)=>{
-         return <div key={i}>
-           <div class="card" style={{width: "18rem"}}>
-  <img className="card-img-top" src={comic?.image.original_url} alt="not available"/>
-  <div className="card-body">
-    <h5 className="card-title">{comic?.name}</h5>
-     <h5>{`This volume has ${comic?.count_of_issues} issues`}</h5> 
-     <h5>{`Release year ${comic?.start_year}`}</h5> 
-     <h5>{`Issue # ${comic?.first_issue.issue_number}`}</h5> 
-     <h5>{`Published by ${comic.publisher?.name}`}</h5> 
-
-    <p className="card-text">{comic.description? comic.description :"not available"}</p>
-    <a href={comic?.site_detail_url} className="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-        
-           </div>
        
-       }):null}   */}
         <Switch>
+        {/* <Route path="/">
+            <Home user={user} />
+          </Route> */}
           <Route path="/new">
             <NewRecipe user={user} />
           </Route>
-          <Route path="/">
-            <RecipeList />
+          <Route path="/comment/:id">
+            <EditCommentPage  comic={comics} user={user} comment={comments}/>
+          </Route>
+          <Route path="/comics">
+           <ComicShowPage comic={comics}user={user} />
+          </Route>
+          <Route path="/mypage">
+           <MyPage  comic={comics} user={user} comment={comments} />
+          </Route>
+          
+          <Route path='/comic/:id'>
+            <MySelection user={user}/>
           </Route>
         </Switch>
       </main>

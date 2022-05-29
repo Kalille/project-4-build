@@ -1,0 +1,3 @@
+class ComicApi < ApplicationRecord
+   
+end

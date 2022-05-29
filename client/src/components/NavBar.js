@@ -4,6 +4,17 @@ import styled from "styled-components";
 import { Button } from "../styles";
 
 function NavBar({ user, setUser }) {
+
+  const link ={
+    
+    width: '115px',
+    padding: '13px',
+    margin: '0 6px 6px',
+    background: 'black',
+    textDecoration: 'none',
+    color: 'white'
+   
+}
   function handleLogoutClick() {
     fetch("/api/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -15,30 +26,64 @@ function NavBar({ user, setUser }) {
   return (
   
     <Wrapper>
-   {`Welcome Back ${username}`}
+   {user ? `Welcome Back ${username}`: <Button>sign in</Button>}
       <Logo>
      
         <Link to="/">Comic Kraze </Link>
       </Logo>
       <Nav>
-        <Button as={Link} to="/new">
+        {/* <Button as={Link} to="/new">
           New Recipe
-        </Button>
+        </Button> */}
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>
       </Nav>
       <NavLink
-           to='/'
-           
-          //  style={link}
+           exact to='/'
+          
+           style={link}
            activestyle={{
                color: 'gray',
                fontWeight: "bold"
            }}
            >
-              Home
+              HOME
            </NavLink>
+           <NavLink
+           to='/comments'
+           
+           style={link}
+           activestyle={{
+               color: 'gray',
+               fontWeight: "bold"
+           }}
+           >
+             COMMENTS
+           </NavLink>
+           <NavLink
+           exact to='/mypage'
+           
+           style={link}
+           activestyle={{
+            fontWeight: "bold",
+            color: "red"
+           }}
+           >
+              MY PAGE
+           </NavLink>
+           <NavLink
+           exact to='/comics'
+           
+           style={link}
+           activestyle={{
+            fontWeight: "bold",
+            color: "red"
+           }}
+           >
+              COMICS
+           </NavLink>
+           
     </Wrapper>
   );
 }
@@ -52,11 +97,12 @@ const Wrapper = styled.header`
 `;
 
 const Logo = styled.h1`
+ 
   font-family: "Permanent Marker", cursive;
   font-size: 3rem;
   color:  blue;
   margin: 0;
-  line-height: 1;
+  line-height: 0.2;
 
   a {
     color: inherit;
