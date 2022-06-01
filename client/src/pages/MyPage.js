@@ -36,7 +36,7 @@ function MyPage({user,comment}){
 
                              {comment ? comment.map((com,)=>{
                                 
-                                    if (com.comic_id === cc.id)
+                                    if (com.comic_id === cc.id && com.user_id === user.id)
                                    
                                     return <div key={com.id}>
                                 <p className="card-text">{com.description} </p>

@@ -29,17 +29,17 @@ function ComicShowPage({user,comic}) {
  return <div  className="grid-3-columns" key={i} >
            <div >
                <div className="card mb-3" style={{maxWidth: "100%"}}>
-               <div class="row no-gutters">
-    <div class="col-md-4">
+               <div className="row no-gutters">
+    <div className="col-md-4">
         <img src={c?.image} class="card-img" alt="..."/>
          </div>
-    <div class="col-md-8">
-    <div class="card-body">
-         <h5 class="card-title">{c.name}</h5>
-         <p class="card-text">{`Published by ${c?.publisher}`}</p>
-<p class="card-text">{`Release year ${c?.release_year}`}</p>
+    <div className="col-md-8">
+    <div className="card-body">
+         <h5 className="card-title">{c.name}</h5>
+         <p className="card-text">{`Published by ${c?.publisher}`}</p>
+<p className="card-text">{`Release year ${c?.release_year}`}</p>
 
-<p class="card-text"><small class="text-muted">{`Issue # ${c.issue_number ? c.issue_number: "N/A"} out of ${c?.count_of_issues}`}</small></p>
+<p className="card-text"><small class="text-muted">{`Issue # ${c.issue_number ? c.issue_number: "N/A"} out of ${c?.count_of_issues}`}</small></p>
 <AddToMyPage user={user} cid={id}/> 
 <div> 
                                  {c.comments ? c.comments.map(comment=>{

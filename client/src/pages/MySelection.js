@@ -4,7 +4,7 @@ import { useHistory} from 'react-router-dom'
 import styled from "styled-components";
 import { Textarea, Button } from "../styles";
 
-function MySelection({user, setComments}){
+function MySelection({user, comments}){
 const [comic,setComic]=useState(null)
 const [description, setDescription]=useState('')
 const [errors,setErrors]=useState('')
@@ -39,7 +39,7 @@ const handleSubmit=(e)=>{
         })
     }).then(res=>{
         if (res.ok){
-            res.json().then(res=>setComments([res]))
+            res.json()
             .then(navigate.push('/mypage'))
          }
          else{ 
