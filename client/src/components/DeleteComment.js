@@ -4,11 +4,12 @@ import { useHistory } from 'react-router-dom'
 
 const DeleteComment=({id})=>{
     const navigate = useHistory()
-    const handleClick=()=>{
+    const handleClick=(e)=>{
+        e.preventDefault()
         fetch(`/api/comments/${id}`,{
             method: 'DELETE'
         })
-        .then(navigate.push('/mypage'))
+        .then(navigate.push('/comics'))
     }
 
     return(

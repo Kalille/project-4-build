@@ -3,18 +3,15 @@ import React, {useState ,useEffect} from "react";
 import AddToMyPage from "../components/AddToMyPage";
 import styled from "styled-components";
 
-function ComicShowPage({user,comic}) {
-   
-    // useEffect(()=>{
+function ComicShowPage({user}) {
+   const [comics,setComics] = useState('')
+    useEffect(()=>{
 
-    //     fetch('/api/comics')
-    //     .then(res=>res.json())
-    //     // .then(res=>console.log(res))
-    //     .then(r=>setComics(r))
-    //   },[])
-
- 
-  // console.log(comic[0].publisher)
+        fetch('/api/comics')
+        .then(res=>res.json())
+        // .then(res=>console.log(res))
+        .then(r=>setComics(r))
+      },[])
  
     return(
 
@@ -23,10 +20,10 @@ function ComicShowPage({user,comic}) {
          <center>
          <h1>Browse 100's of Comics</h1>
          </center>
-   {comic ? comic.map((c, i)=>{
+   {comics ? comics.map((c)=>{
             const id = c.id
           
- return <div  className="grid-3-columns" key={i} >
+ return <div  className="grid-3-columns" key={c.id} >
            <div >
                <div className="card mb-3" style={{maxWidth: "100%"}}>
                <div className="row no-gutters">

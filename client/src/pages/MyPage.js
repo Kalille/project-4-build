@@ -1,15 +1,31 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import EditButton from '../components/editButton';
 import EditCommentPage from './EditCommentPage';
 import styled from "styled-components";
 
-function MyPage({user,comment}){
-
-
-    const {commented_comics,username,bio,image_url} = user
-    // console.log(commented_comics)
-    // console.log(bio)
+function MyPage(){
+const [comments,setComments] = useState('')
+const [user,setUser]= useState('')
+    useEffect(() => {
+   
+        fetch("/api/comments").then((r) => {
+          if (r.ok) {
+            r.json().then((comment) => setComments(comment));
+          }
+        });
+      }, []);
+      useEffect(() => {
+        fetch("/api/me").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => setUser(user));
+          }
+        });
+      }, []);
+    // const {commented_comics,username,bio,image_url} = user
+    
+ 
+    // console.log(length)
     return(
         
 <Wrapper>
@@ -17,16 +33,16 @@ function MyPage({user,comment}){
 <div className="card mb-3" style={{width:" 540px"}}> 
   <div className="row no-gutters">
         <div className="col-md-4">
-             <img src={image_url} class="card-img" alt="N/A"/>
+             <img src={user.image_url} class="card-img" alt="N/A"/>
         </div>
               <div className="col-md-8">
                     <div className="card-body">
-                        <h3 className="card-title">{` ${username}, Thanks for sharing your thoughts`}</h3>
-                        <p className="card-text"><small class="text-muted">{`total comments ${user.commented_comics.length}`}</small></p>
+                        <h3 className="card-title">{` ${user.username}, Thanks for sharing your thoughts`}</h3>
+                        <p className="card-text"><small class="text-muted">{`You Have ${user.commented_comics?.length} total comments `}</small></p>
                 </div>
                 <br/>
                 <div>    
-                    {commented_comics ? commented_comics.map((cc, i)=>{
+                    {user.commented_comics ? user.commented_comics.map((cc, i)=>{
                                 return <div key={i}>  
            
                          <div className="card" style={{width: "18rem"}}>
@@ -34,7 +50,7 @@ function MyPage({user,comment}){
                         <div className="card-body">
                                      <h5 className="card-title">{cc.name}</h5>
 
-                             {comment ? comment.map((com,)=>{
+                             {comments ? comments.map((com)=>{
                                 
                                     if (com.comic_id === cc.id && com.user_id === user.id)
                                    

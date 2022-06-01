@@ -6,7 +6,7 @@ class Api::ComicsController < ApplicationController
       end
       def create
         comic = Comic.create(comic_params)
-        byebug
+       
         render json: comic, status: :created
       end
 
