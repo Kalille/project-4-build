@@ -18,7 +18,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
   end
 
-  def record_not_found
+  def not_found
     render json: { errors: ["Not authorized"] }, status: :unauthorized unless current_user
 
   end

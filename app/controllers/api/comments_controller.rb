@@ -9,10 +9,11 @@ class Api::CommentsController < ApplicationController
       end
 
       def create
- 
+        byebug
         comment = @current_user.comments.create!(description: params[:description], comic_id: params[:comic][:id])
      
         render json: comment, status: :created
+      
       end
 
       def show
@@ -30,7 +31,7 @@ class Api::CommentsController < ApplicationController
 
 
       def destroy
-        comment = @current_user.comment.find_by(id: params[:id])
+        comment = @current_user.comments.find_by(id: params[:id])
         comment.delete
         head :no_content
       end

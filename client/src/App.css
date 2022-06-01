@@ -1,4 +1,36 @@
-.cards{
+.grid-3-columns{
+    margin: 5rem auto;
+    width: min(90%,75rem);
     display: "grid";
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 33% 33% 33%;
+
 }
+.comic-card {
+    overflow: hidden;
+    box-shadow:0 2px 20px gray;
+    flex-direction: row;
+   display:flex;
+    flex-wrap: wrap;
+    transition:transform 200ms ease-in;
+    width: 650px;
+    height: 650px;
+    cursor: pointer;
+    align-items: center;
+  }
+  /* .comic-card {
+    width: 75px;
+    height: 100px;
+    margin: 15%;
+    padding: 30px;
+    
+    transition: transform 1s;
+    transform-style: preserve-3d;
+  } */
+  .cards{
+      margin: 0 auto;
+      max-width: 1000px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      font-family: sans-serif;
+  }

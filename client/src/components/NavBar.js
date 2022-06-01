@@ -26,46 +26,30 @@ function NavBar({ user, setUser }) {
   return (
   
     <Wrapper>
-   {user ? `Welcome Back ${username}`: <Button>sign in</Button>}
+      <div style={{fontSize:"35px"}}>{user ? `Welcome Back ${username}`: <Button>sign in</Button>}</div>
+          <center>
       <Logo>
      
-        <Link to="/">Comic Kraze </Link>
+          <Link to="/signup">Comic Kraze </Link>
       </Logo>
+      </center>
       <Nav>
-        {/* <Button as={Link} to="/new">
-          New Recipe
-        </Button> */}
-        <Button variant="outline" onClick={handleLogoutClick}>
-          Logout
-        </Button>
-      </Nav>
-      <NavLink
-           exact to='/'
-          
-           style={link}
-           activestyle={{
-               color: 'gray',
-               fontWeight: "bold"
+          <NavLink
+            to='/comic'
+           
+            style={link}
+            activestyle={{
+            color: 'gray',
+            fontWeight: "bold"
            }}
            >
-              HOME
+                  My Comics
            </NavLink>
            <NavLink
-           to='/comments'
+            exact to='/mypage'
            
-           style={link}
-           activestyle={{
-               color: 'gray',
-               fontWeight: "bold"
-           }}
-           >
-             COMMENTS
-           </NavLink>
-           <NavLink
-           exact to='/mypage'
-           
-           style={link}
-           activestyle={{
+            style={link}
+            activestyle={{
             fontWeight: "bold",
             color: "red"
            }}
@@ -73,24 +57,25 @@ function NavBar({ user, setUser }) {
               MY PAGE
            </NavLink>
            <NavLink
-           exact to='/comics'
+            exact to='/comics'
            
-           style={link}
-           activestyle={{
+            style={link}
+            activestyle={{
             fontWeight: "bold",
             color: "red"
            }}
            >
               COMICS
            </NavLink>
-           
+            <Button variant="outline" onClick={handleLogoutClick}>Logout </Button>
+           </Nav> 
     </Wrapper>
   );
 }
 
 const Wrapper = styled.header`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 8px;
   background: linear-gradient(blue)
@@ -103,6 +88,7 @@ const Logo = styled.h1`
   color:  blue;
   margin: 0;
   line-height: 0.2;
+  
 
   a {
     color: inherit;

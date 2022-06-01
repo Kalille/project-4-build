@@ -7,7 +7,7 @@ function AddToMyPage({cid}){
 
     return(
         <div>  <Button as={Link} to={`/comic/${cid}`}>
-     Add a Comment
+     Add Your Thoughts
       </Button>
       </div>
 

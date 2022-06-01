@@ -23,6 +23,6 @@ class Api::ComicsController < ApplicationController
       private
 
     def comic_params
-        params.require(:comic).permit(:name, :release_year, :publisher, :image, :issue_number, :count_of_issues, :creator)
+        params.require(:comic).permit(:name, :release_year, :publisher, :image, :issue_number, :count_of_issues, :creator_id)
     end
 end

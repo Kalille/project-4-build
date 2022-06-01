@@ -11,15 +11,14 @@ import MyPage from "../pages/MyPage";
 import MySelection from "../pages/MySelection";
 import Home from "../pages/Home";
 import EditCommentPage from "../pages/EditCommentPage";
+import AddNewComic from "../pages/AddNewComic";
+import '../App.css';
+import MyComic from "../pages/MyComic";
 
 function App() {
   const [user, setUser] = useState(null);
   const [comics,setComics]=useState('');
   const [comments,setComments]=useState('')
-  const key = "4b22c0361638acf814a29e4ebfbf3825d63abf6a"
-
-  const url =`https://comicvine.gamespot.com/api/volumes/?api_key=${key}&format=json&sort=name:asc&filter=name:Walking%20Dead`
-
 
   useEffect(() => {
     fetch("/api/me").then((r) => {
@@ -32,7 +31,7 @@ function App() {
    
     fetch("/api/comments").then((r) => {
       if (r.ok) {
-        r.json().then((comment) => setComments(comment));
+        r.json().then((comment) => setComments([comments,...comment]));
       }
     });
   }, []);
@@ -44,7 +43,7 @@ function App() {
       }
     });
   }, []);
-  // console.log(comics)
+ 
 
   if (!user) return <Login onLogin={setUser} />;
 
@@ -54,12 +53,6 @@ function App() {
       <main>
        
         <Switch>
-        {/* <Route path="/">
-            <Home user={user} />
-          </Route> */}
-          <Route path="/new">
-            <NewRecipe user={user} />
-          </Route>
           <Route path="/comment/:id">
             <EditCommentPage  comic={comics} user={user} comment={comments}/>
           </Route>
@@ -69,9 +62,14 @@ function App() {
           <Route path="/mypage">
            <MyPage  comic={comics} user={user} comment={comments} />
           </Route>
-          
-          <Route path='/comic/:id'>
+           <Route path='/comic/:id'>
             <MySelection user={user}/>
+          </Route>
+          <Route path='/new'>
+            <AddNewComic user={user}/>
+          </Route>
+          <Route path='/comic'>
+            <MyComic user={user}/>
           </Route>
         </Switch>
       </main>

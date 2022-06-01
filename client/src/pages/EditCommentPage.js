@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import {useParams,useHistory} from 'react-router-dom'
 import { Textarea } from "../styles";
+import DeleteComment from "../components/DeleteComment";
 
 const EditCommentPage=()=>{
     const {id} = useParams()
@@ -8,13 +9,13 @@ const EditCommentPage=()=>{
     const [description, setDescription] = useState('')
     const [errors, setErrors]=useState('')
     const navigate = useHistory()
-console.log(id)
+
     useEffect(()=>{
         fetch(`/api/comments/${id}`)
         .then(res=>res.json())
         .then(res=>setComment(res))
     },[id])
-
+console.log(comment,id)
     const handleChange=(e)=>{
         setDescription(e.target.value)
     }
@@ -33,11 +34,11 @@ console.log(id)
             })
         }).then(res=>{
             if (res.ok){
-                setDescription(...description,res)
+                setDescription({res,...description})
                 navigate.push('/mypage')
              }
              else{ 
-                 res.json().catch(err=> setErrors(err.errors))}
+                 res.json().catch(err=> alert(err.errors.exception.record.errors.full_messages))}
             
         })
     
@@ -46,10 +47,14 @@ console.log(id)
 
     return(
         <div>
+            <p>
+                {comment.description}   <DeleteComment id={id}/>
+            </p>
             <form onSubmit={handleSubmit}>
             <Textarea onChange={handleChange} type='text-field'>
              </Textarea>
              <button> Edit</button>
+          
             </form>
         <p>{errors}</p>
         </div>

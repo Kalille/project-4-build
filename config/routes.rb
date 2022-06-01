@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   namespace :api do
     resources :users
-    resources :comics, only: [:index, :create, :show]
+    resources :comics, only: [:index, :create, :show, :destroy]
     resources :comments 
     # resources :comic_apis, only: [:index, :show]
     resources :recipes, only: [:index, :create]

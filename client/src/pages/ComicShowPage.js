@@ -1,6 +1,7 @@
 import React, {useState ,useEffect} from "react";
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
 import AddToMyPage from "../components/AddToMyPage";
+import styled from "styled-components";
 
 function ComicShowPage({user,comic}) {
     const [comics,setComics]=useState()
@@ -16,15 +17,16 @@ function ComicShowPage({user,comic}) {
   console.log(user)
  
     return(
-             <div>
+        <Wrapper>
+        <WrapperChild>
                  <center>
                  <h1>Browse 100's of Comics</h1>
                  </center>
            {comic ? comic.map((c, i)=>{
                     const id = c.id
                   
-         return <div className="row row-cols-1 row-cols-md-3" key={i} >
-                   <div className="col mb-4">
+         return <div  className="cards" key={i} >
+                   <div >
                        <div className="card" style={{width: "18rem"}}>
                             <img className="card-img-top" src={c?.image} alt="not available"/>
                             <div className="card-body">
@@ -35,7 +37,7 @@ function ComicShowPage({user,comic}) {
                               <AddToMyPage user={user} cid={id}/>  
                              <div> 
                                  {c.comments ? c.comments.map(comment=>{
-                                 return <div>
+                                 return <div key={comment.id}>
                                      <h4>Comments</h4>
                                      <p>{comment.description}</p>
                                      </div>
@@ -47,9 +49,20 @@ function ComicShowPage({user,comic}) {
            </div>
        
        }):null}   
-        </div>
+         </WrapperChild>
+    </Wrapper>
     )
 }
+const Wrapper = styled.section`
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 16px;
+  display: flex;
+  gap: 24px;
+`;
 
+const WrapperChild = styled.div`
+  flex: 1;
+`;
 
 export default ComicShowPage
