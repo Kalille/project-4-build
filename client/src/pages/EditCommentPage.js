@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import {useParams,useHistory} from 'react-router-dom'
-import { Textarea } from "../styles";
+import { Button,Textarea } from "../styles";
 import DeleteComment from "../components/DeleteComment";
 
 const EditCommentPage=()=>{
@@ -15,7 +15,7 @@ const EditCommentPage=()=>{
         .then(res=>res.json())
         .then(res=>setComment(res))
     },[id])
-console.log(comment,id)
+console.log(comment.description,id)
     const handleChange=(e)=>{
         setDescription(e.target.value)
     }
@@ -34,7 +34,8 @@ console.log(comment,id)
             })
         }).then(res=>{
             if (res.ok){
-                setDescription({res,...description})
+                res.json().then(setDescription(...description,res))
+           
                 navigate.push('/mypage')
              }
              else{ 
@@ -48,12 +49,16 @@ console.log(comment,id)
     return(
         <div>
             <p>
-                {comment.description}   <DeleteComment id={id}/>
+                <label> Your Original Comment</label>
+               <Textarea value={`${comment.description}`} >  </Textarea>  <Button onClick={(e)=>fetch(`/api/comments/${id}`,{
+            method: 'DELETE'
+        })
+        .then(navigate.push('/mypage'))}>delete</Button>
             </p>
             <form onSubmit={handleSubmit}>
-            <Textarea onChange={handleChange} type='text-field'>
+            <Textarea onChange={handleChange} placeholder="Edit Comment..." type='text-field'>
              </Textarea>
-             <button> Edit</button>
+             <Button> Edit</Button>
           
             </form>
         <p>{errors}</p>

@@ -5,11 +5,11 @@ class Api::CommentsController < ApplicationController
 
     def index
       
-        render json: Comment.all 
+        render json: Comment.all
       end
 
       def create
-        byebug
+       
         comment = @current_user.comments.create!(description: params[:description], comic_id: params[:comic][:id])
      
         render json: comment, status: :created
@@ -17,7 +17,7 @@ class Api::CommentsController < ApplicationController
       end
 
       def show
-        comment = Comment.find_by(comment_params)
+        comment = @current_user.comments.find_by(id: params[:id])
         render json: comment
 
       end

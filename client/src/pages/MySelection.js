@@ -49,15 +49,15 @@ const handleSubmit=(e)=>{
 
 
 }
-             const handleChange=(e)=>{
-                setDescription(e.target.value)
-       
-             }
+const handleChange=(e)=>{
+    setDescription(e.target.value)
+
+ }    
     
             if (!comic) return <h2>loading...</h2>
             return(
 <div className="grid-3-columns">
-            <p>{errors}</p>
+     <p>{errors}</p>
         <center>
     <div class="card mb-3" style={{maxWidth: "100%"}}>
         <div class="row no-gutters">
