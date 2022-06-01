@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useHistory} from 'react-router-dom'
 
 
-const AddNewComic= ({user})=>{
+const AddNewComic= ({user,setComics})=>{
 const [name,setName]= useState('')
 const [ReleaseYear,setRelease]= useState('')
 const [publisher,setPublisher]= useState('')
@@ -54,8 +54,9 @@ const handleSubmit=(e)=>{
         })
     }).then(res=>{
         if (res.ok){
+          res.json().then(res=>setComics(res)).then(navigate.push('/comic'))
           
-            navigate.push('/comic')
+            
          }
          else{ 
              res.json().catch(err=> setErrors(err.errors))}

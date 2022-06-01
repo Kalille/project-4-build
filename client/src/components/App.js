@@ -31,7 +31,7 @@ function App() {
    
     fetch("/api/comments").then((r) => {
       if (r.ok) {
-        r.json().then((comment) => setComments([comments,...comment]));
+        r.json().then((comment) => setComments(comment));
       }
     });
   }, []);
@@ -63,10 +63,10 @@ function App() {
            <MyPage  comic={comics} user={user} comment={comments} />
           </Route>
            <Route path='/comic/:id'>
-            <MySelection user={user}/>
+            <MySelection addComment={setComments}user={user}/>
           </Route>
           <Route path='/new'>
-            <AddNewComic user={user}/>
+            <AddNewComic addComic={setComics} user={user}/>
           </Route>
           <Route path='/comic'>
             <MyComic user={user}/>

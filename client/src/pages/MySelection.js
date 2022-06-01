@@ -4,7 +4,7 @@ import { useHistory} from 'react-router-dom'
 import styled from "styled-components";
 import { Textarea, Button } from "../styles";
 
-function MySelection({user}){
+function MySelection({user, setComments}){
 const [comic,setComic]=useState(null)
 const [description, setDescription]=useState('')
 const [errors,setErrors]=useState('')
@@ -39,8 +39,8 @@ const handleSubmit=(e)=>{
         })
     }).then(res=>{
         if (res.ok){
-            setDescription([...description,res])
-            navigate.push('/mypage')
+            res.json().then(res=>setComments([res]))
+            .then(navigate.push('/mypage'))
          }
          else{ 
              res.json().catch(err=> setErrors(err.errors))}
@@ -71,6 +71,7 @@ const handleChange=(e)=>{
                          <Textarea  onChange={handleChange} type='text-field' placeholder="Enter Your Thoughts here...">
                         </Textarea>
                          <Button >Add Thought</Button>
+                         <p>{description}</p>
                          </form>     
             </div>
     </div>
@@ -83,3 +84,5 @@ const handleChange=(e)=>{
 
 
 export default MySelection
+
+
