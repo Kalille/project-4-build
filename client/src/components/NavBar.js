@@ -30,7 +30,7 @@ function NavBar({ user, setUser }) {
           <center>
       <Logo>
      
-          <Link to="/signup">Comic Kraze </Link>
+          <Link to="/signup">Komic Kraze </Link>
       </Logo>
       </center>
       <Nav>
@@ -43,7 +43,7 @@ function NavBar({ user, setUser }) {
             fontWeight: "bold"
            }}
            >
-                  My Comics
+                  My Komics
            </NavLink>
            <NavLink
             exact to='/mypage'
@@ -65,7 +65,7 @@ function NavBar({ user, setUser }) {
             color: "red"
            }}
            >
-              COMICS
+              KOMICS
            </NavLink>
             <Button variant="outline" onClick={handleLogoutClick}>Logout </Button>
            </Nav> 

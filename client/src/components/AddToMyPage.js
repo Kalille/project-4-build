@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Box, Button } from "../styles";
-import { Link, useParams } from "react-router-dom";
+import {  Button } from "../styles";
+import { Link } from "react-router-dom";
 
 function AddToMyPage({cid}){
 

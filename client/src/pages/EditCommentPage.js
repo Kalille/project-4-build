@@ -15,7 +15,7 @@ const EditCommentPage=()=>{
         .then(res=>res.json())
         .then(res=>setComment(res))
     },[id])
-console.log(comment.description,id)
+
     const handleChange=(e)=>{
         setDescription(e.target.value)
     }
@@ -50,7 +50,7 @@ console.log(comment.description,id)
         <div>
             <p>
                 <label> Your Original Comment</label>
-               <Textarea value={`${comment.description}`} >  </Textarea>  <Button onClick={(e)=>fetch(`/api/comments/${id}`,{
+               <Textarea value={`${comment?.description}`} >  </Textarea>  <Button onClick={(e)=>fetch(`/api/comments/${id}`,{
             method: 'DELETE'
         })
         .then(navigate.push('/mypage'))}>delete</Button>

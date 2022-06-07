@@ -22,10 +22,7 @@ const [user,setUser]= useState('')
           }
         });
       }, []);
-    // const {commented_comics,username,bio,image_url} = user
-    
- 
-    // console.log(length)
+
     return(
         
 <Wrapper>
@@ -55,7 +52,7 @@ const [user,setUser]= useState('')
                                     if (com.comic_id === cc.id && com.user_id === user.id)
                                    
                                     return <div key={com.id}>
-                                <p className="card-text">{com.description} </p>
+                                <p className="card-text">{com?.description} </p>
                                 <EditButton  id={com.id}/>
                             </div>
                                      else

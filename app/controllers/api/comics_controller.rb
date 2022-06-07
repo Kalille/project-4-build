@@ -5,8 +5,9 @@ class Api::ComicsController < ApplicationController
         render json: Comic.all, include: [:comments, :users]
       end
       def create
+
         comic = Comic.create(comic_params)
-       
+       byebug
         render json: comic, status: :created
       end
 

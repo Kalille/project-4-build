@@ -1,8 +1,8 @@
 import React, {useEffect,useState} from 'react';
 import {useParams} from 'react-router-dom'
 import { useHistory} from 'react-router-dom'
-import styled from "styled-components";
-import { Textarea, Button } from "../styles";
+
+import { Error,Textarea, Button } from "../styles";
 
 function MySelection({user, comments}){
 const [comic,setComic]=useState(null)
@@ -20,7 +20,7 @@ useEffect(()=>{
     .then(res=>res.json())
   
     .then(data=>{setComic(data)})
-    .catch(errors=>console.log(errors))
+  
 },[id])
 
 
@@ -42,10 +42,8 @@ const handleSubmit=(e)=>{
             res.json()
             .then(navigate.push('/mypage'))
          }
-         else{ 
-             res.json().catch(err=> setErrors(err.errors))}
-        
-    })
+       })
+       .catch(err=>alert(err.errors))
 
 
 }
@@ -53,20 +51,23 @@ const handleChange=(e)=>{
     setDescription(e.target.value)
 
  }    
-    
-            if (!comic) return <h2>loading...</h2>
+    if (!comic) return <h2>loading...</h2>
+
+
             return(
 <div className="grid-3-columns">
-     <p>{errors}</p>
+     {/* <p>{errors?.map(err=>(
+         <Error key={err}> {err}</Error>
+     ))}</p> */}
         <center>
-    <div class="card mb-3" style={{maxWidth: "100%"}}>
-        <div class="row no-gutters">
-            <div class="col-md-4">
+    <div className="card mb-3" style={{maxWidth: "100%"}}>
+        <div className="row no-gutters">
+            <div className="col-md-4">
                 <img src={comic?.image} class="card-img" alt="..."/>
                  </div>
-            <div class="col-md-8">
-            <div class="card-body">
-                 <h5 class="card-title">{comic.name}</h5>
+            <div className="col-md-8">
+            <div className="card-body">
+                 <h5 className="card-title">{comic.name}</h5>
                          <form onSubmit={handleSubmit}>
                          <Textarea  onChange={handleChange} type='text-field' placeholder="Enter Your Thoughts here...">
                         </Textarea>

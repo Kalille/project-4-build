@@ -1,7 +1,5 @@
 class Api::CommentsController < ApplicationController
     skip_before_action :authorize, only: [:index]
-    # skip_before_action :not_found, only: [:update]
-   
 
     def index
       
@@ -9,11 +7,12 @@ class Api::CommentsController < ApplicationController
       end
 
       def create
-       
+   
         comment = @current_user.comments.create!(description: params[:description], comic_id: params[:comic][:id])
-     
-        render json: comment, status: :created
+     byebug
       
+        render json: comment, status: :created
+     
       end
 
       def show

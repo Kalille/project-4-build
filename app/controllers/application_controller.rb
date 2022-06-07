@@ -14,12 +14,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   end
 
-  def render_unprocessable_entity_response(exception)
-    render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+  def render_unprocessable_entity_response(invalid)
+    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 
-  def not_found
-    render json: { errors: ["Not authorized"] }, status: :unauthorized unless current_user
+  def not_found(exception)
+    render json: { errors: ["#{exception.model}"] }, status: :not_found unless current_user
 
   end
 

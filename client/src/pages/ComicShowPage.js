@@ -5,12 +5,17 @@ import styled from "styled-components";
 
 function ComicShowPage({user}) {
    const [comics,setComics] = useState('')
+   const [allusers, setAllusers] = useState('')
     useEffect(()=>{
-
-        fetch('/api/comics')
+         fetch('/api/comics')
         .then(res=>res.json())
         // .then(res=>console.log(res))
         .then(r=>setComics(r))
+      },[])
+      useEffect(()=>{
+        fetch('/api/users')
+        .then(res=> res.json())
+        .then(res=> setAllusers(res))
       },[])
  
     return(
@@ -18,7 +23,7 @@ function ComicShowPage({user}) {
 <Wrapper>
 <WrapperChild>
          <center>
-         <h1>Browse 100's of Comics</h1>
+         <h1>Browse 100's of Komics</h1>
          </center>
    {comics ? comics.map((c)=>{
             const id = c.id
@@ -38,11 +43,17 @@ function ComicShowPage({user}) {
 
 <p className="card-text"><small class="text-muted">{`Issue # ${c.issue_number ? c.issue_number: "N/A"} out of ${c?.count_of_issues}`}</small></p>
 <AddToMyPage user={user} cid={id}/> 
+<br/>
 <div> 
                                  {c.comments ? c.comments.map(comment=>{
+                                  
                                  return <div key={comment.id}>
-                                     <h4>Comments</h4>
-                                     <p>{comment.description}</p>
+                                     {/* <h4>{`Komment by ${comment.user_id === user.id ? user.username : "Komments" }`}</h4> */}
+                                     <h4>{allusers ? allusers.map((data)=>{
+                                       if (comment.user_id === data.id)
+                                       return <h4>{`${data?.username}'s thoughts`}</h4>
+                                     }):null}</h4>
+                                     <p>{comment?.description}</p>
                                      </div>
                                 //  <p>{comment.users.username}</p>
                              }):null}</div>

@@ -25,7 +25,7 @@ const {created_comics}= user
 
     return(
         <Wrapper>
-            <NavLink to='/new'><h2>Add a New Comic Here</h2></NavLink>
+            <NavLink to='/new'><h2>Add a New Komic Here</h2></NavLink>
             <br/>
             <br/>
  <WrapperChild>

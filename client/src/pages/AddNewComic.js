@@ -59,9 +59,9 @@ const handleSubmit=(e)=>{
           // .then(res=>console.log(res))
           .then(res=>{
             setComic(res)
-            navigate.push('/comics')
+            // navigate.push('/comics')
           })
-          // .then(navigate.push('/comics'))
+          .then(navigate.push('/comics'))
           
             
          }
