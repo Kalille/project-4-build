@@ -1,6 +1,10 @@
 # Getting Started with Create React App
 
+This is my phase 4 project, I created a comic browsing app called Komic Kraze. You can browse hundreds of comics,
+provided by the Comic vine API. The user is able to add comments and view other comments 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 

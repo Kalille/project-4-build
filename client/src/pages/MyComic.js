@@ -44,7 +44,6 @@ const {created_comics}= user
              <h6 className="card-text">{`Published by ${comic?.publisher}`}</h6> 
              <br/>
              <em className="card-text">{`Issue # ${comic.issue_number ? comic.issue_number: "N/A"} out of ${comic?.count_of_issues}`}</em> 
-             {/* <p className="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> */}
            </div>
          </div>
        </div>

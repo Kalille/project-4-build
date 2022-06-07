@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
-import RecipeList from "../pages/RecipeList";
-import NewRecipe from "../pages/NewRecipe";
 import 'bootstrap/dist/css/bootstrap.css'
 import ComicShowPage from "../pages/ComicShowPage";
 import MyPage from "../pages/MyPage";
-// import CommentsPage from "../pages/CommentsPage";
 import MySelection from "../pages/MySelection";
-import Home from "../pages/Home";
 import EditCommentPage from "../pages/EditCommentPage";
 import AddNewComic from "../pages/AddNewComic";
 import '../App.css';
@@ -63,10 +59,10 @@ function App() {
            <MyPage  comic={comics} user={user} comment={comments} />
           </Route>
            <Route path='/comic/:id'>
-            <MySelection addComment={setComments}user={user}/>
+            <MySelection user={user}/>
           </Route>
           <Route path='/new'>
-            <AddNewComic addComic={setComics} user={user}/>
+            <AddNewComic  user={user}/>
           </Route>
           <Route path='/comic'>
             <MyComic user={user}/>
