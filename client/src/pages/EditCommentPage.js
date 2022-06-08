@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import {useParams,useHistory} from 'react-router-dom'
-import { Button,Textarea } from "../styles";
-import DeleteComment from "../components/DeleteComment";
+import { Error,Button,Textarea,FormField } from "../styles";
+
 
 const EditCommentPage=()=>{
     const {id} = useParams()
     const [comment, setComment]=useState('')
     const [description, setDescription] = useState('')
-    const [errors, setErrors]=useState('')
+    const [errors, setErrors]=useState([])
     const navigate = useHistory()
 
     useEffect(()=>{
@@ -21,7 +21,7 @@ const EditCommentPage=()=>{
     }
 
     const handleSubmit=(e)=>{
-        // debugger
+   
          e.preventDefault()
         fetch(`/api/comments/${id}`,{
             method: 'PATCH',
@@ -39,7 +39,7 @@ const EditCommentPage=()=>{
                 navigate.push('/mypage')
              }
              else{ 
-                 res.json().catch(err=> alert(err.errors.exception.record.errors.full_messages))}
+                 res.json().catch(err=> setErrors(err.errors))}
             
         })
     
@@ -56,12 +56,16 @@ const EditCommentPage=()=>{
         .then(navigate.push('/mypage'))}>delete</Button>
             </p>
             <form onSubmit={handleSubmit}>
-            <Textarea onChange={handleChange} placeholder="Edit Comment..." type='text-field'>
+            <Textarea onChange={handleChange} placeholder="Edit Comment Here..." type='text-field'>
              </Textarea>
              <Button> Edit</Button>
-          
+             <FormField>
+              {errors?.map((err) => (
+                <Error key={err}>{err}</Error>
+              ))}
+            </FormField>
             </form>
-        <p>{errors}</p>
+      
         </div>
     )
 }

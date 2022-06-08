@@ -1,10 +1,10 @@
-import React, {useReducer, useState} from 'react'
-import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
+import React, { useState} from 'react'
+import { Button, Error, FormField, Input, Label} from "../styles";
 import styled from "styled-components";
 import { useHistory} from 'react-router-dom'
 
 
-const AddNewComic= ({user})=>{
+const ComicForm= ({user})=>{
 const [name,setName]= useState('')
 const [ReleaseYear,setRelease]= useState('')
 const [publisher,setPublisher]= useState('')
@@ -53,14 +53,15 @@ const handleSubmit=(e)=>{
             creator_id: user.id
         })
     }).then(res=>{
-        if (!res.ok){
-          res.json().catch(err=> setErrors(err.errors))
-          // navigate.push('/comics')
+        if (res.ok){
+         
+          navigate.push('/comics')
            }
-        //  else{ 
-        //    res.json().catch(err=> setErrors(err.errors))
-          
-        //   }
+         else{ 
+           
+          res.json().then(err=> setErrors(err.errors))
+         
+          }
         
     }
     )
@@ -71,13 +72,13 @@ const handleSubmit=(e)=>{
     return(
         <Wrapper>
         <WrapperChild>
-          <h2>Create Comic</h2>
+          <h2>Kreate a New Komic</h2>
           <form onSubmit={handleSubmit}>
-          <FormField>
-              {errors?.map((err) => (
+       {errors?.map((err) => (
                 <Error key={err}>{err}</Error>
               ))}
-            </FormField>
+           
+        
             <FormField>
               <Label htmlFor="title">Title</Label>
               <Input
@@ -150,4 +151,4 @@ const handleSubmit=(e)=>{
 
 
 
-export default AddNewComic
+export default ComicForm

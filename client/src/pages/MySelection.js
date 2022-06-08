@@ -44,6 +44,7 @@ const handleSubmit=(e)=>{
          }
          else{
              res.json().then(err=>setErrors(err.errors))
+            
          }
        })
      

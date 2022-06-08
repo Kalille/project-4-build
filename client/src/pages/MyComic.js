@@ -1,14 +1,14 @@
 import React, {useEffect,useState} from 'react'
 import styled from "styled-components";
 import { Button} from "../styles";
-import AddNewComic from './AddNewComic';
+
 import {NavLink,useHistory} from 'react-router-dom'
 
 
 
 
 const MyComic=()=>{
-const [comic,setComic]= useState('')
+
 const [user,setUser]= useState('')
 const navigate = useHistory()
 

@@ -7,7 +7,7 @@ import ComicShowPage from "../pages/ComicShowPage";
 import MyPage from "../pages/MyPage";
 import MySelection from "../pages/MySelection";
 import EditCommentPage from "../pages/EditCommentPage";
-import AddNewComic from "../pages/AddNewComic";
+import ComicForm from "../components/ComicForm";
 import '../App.css';
 import MyComic from "../pages/MyComic";
 
@@ -62,7 +62,7 @@ function App() {
             <MySelection user={user}/>
           </Route>
           <Route path='/new'>
-            <AddNewComic  user={user}/>
+            <ComicForm  user={user}/>
           </Route>
           <Route path='/comic'>
             <MyComic user={user}/>
