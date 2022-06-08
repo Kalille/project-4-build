@@ -23,7 +23,7 @@ class Api::CommentsController < ApplicationController
 
       def update
         comment = @current_user.comments.find_by(id: params[:id])
-        comment.update(comment_params)
+        comment.update!(comment_params)
         render json: comment
 
       end

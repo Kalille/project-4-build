@@ -39,7 +39,7 @@ const EditCommentPage=()=>{
                 navigate.push('/mypage')
              }
              else{ 
-                 res.json().catch(err=> setErrors(err.errors))}
+                 res.json().then(err=> setErrors(err.errors))}
             
         })
     
