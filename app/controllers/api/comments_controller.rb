@@ -9,7 +9,7 @@ class Api::CommentsController < ApplicationController
       def create
    
         comment = @current_user.comments.create!(description: params[:description], comic_id: params[:comic][:id])
-     byebug
+   
       
         render json: comment, status: :created
      

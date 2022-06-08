@@ -7,7 +7,7 @@ import { Error,Textarea, Button } from "../styles";
 function MySelection({user, comments}){
 const [comic,setComic]=useState(null)
 const [description, setDescription]=useState('')
-const [errors,setErrors]=useState('')
+const [errors,setErrors]=useState([])
 
     const {id} = useParams()
 const navigate = useHistory()
@@ -39,11 +39,14 @@ const handleSubmit=(e)=>{
         })
     }).then(res=>{
         if (res.ok){
-            res.json()
-            .then(navigate.push('/mypage'))
+          
+            navigate.push('/mypage')
+         }
+         else{
+             res.json().then(err=>setErrors(err.errors))
          }
        })
-       .catch(err=>alert(err.errors))
+     
 
 
 }
@@ -56,9 +59,9 @@ const handleChange=(e)=>{
 
             return(
 <div className="grid-3-columns">
-     {/* <p>{errors?.map(err=>(
+     <p>{errors?.map(err=>(
          <Error key={err}> {err}</Error>
-     ))}</p> */}
+     ))}</p>
         <center>
     <div className="card mb-3" style={{maxWidth: "100%"}}>
         <div className="row no-gutters">

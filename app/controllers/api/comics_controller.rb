@@ -1,13 +1,13 @@
 class Api::ComicsController < ApplicationController
-    skip_before_action :authorize, only: :index
+    skip_before_action :authorize, only: [:index,:create]
 
     def index
         render json: Comic.all, include: [:comments, :users]
       end
       def create
 
-        comic = Comic.create(comic_params)
-       byebug
+        comic = Comic.create!(comic_params)
+   
         render json: comic, status: :created
       end
 

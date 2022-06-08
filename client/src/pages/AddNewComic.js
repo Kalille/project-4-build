@@ -4,15 +4,14 @@ import styled from "styled-components";
 import { useHistory} from 'react-router-dom'
 
 
-const AddNewComic= ({user,comics})=>{
+const AddNewComic= ({user})=>{
 const [name,setName]= useState('')
-const [comic,setComic]= useState('')
 const [ReleaseYear,setRelease]= useState('')
 const [publisher,setPublisher]= useState('')
 const [image,setImage]= useState('')
 const [issueNumber,setIssueNumber]= useState('')
 const [countOfIssue,setCountOfIssue]= useState('')
-const [errors,setErrors]= useState(null)
+const [errors,setErrors]= useState([])
 const navigate = useHistory()
 
 const handleName =(e)=>{
@@ -36,7 +35,7 @@ const handleCountOfIssue =(e)=>{
 
 
 const handleSubmit=(e)=>{
-    // debugger
+  
      e.preventDefault()
     fetch(`/api/comics`,{
         method: 'POST',
@@ -54,21 +53,17 @@ const handleSubmit=(e)=>{
             creator_id: user.id
         })
     }).then(res=>{
-        if (res.ok){
-          res.json()
-          // .then(res=>console.log(res))
-          .then(res=>{
-            setComic(res)
-            // navigate.push('/comics')
-          })
-          .then(navigate.push('/comics'))
+        if (!res.ok){
+          res.json().catch(err=> setErrors(err.errors))
+          // navigate.push('/comics')
+           }
+        //  else{ 
+        //    res.json().catch(err=> setErrors(err.errors))
           
-            
-         }
-         else{ 
-             res.json().catch(err=> setErrors(err.errors))}
+        //   }
         
-    })
+    }
+    )
 
 
 }
@@ -78,6 +73,11 @@ const handleSubmit=(e)=>{
         <WrapperChild>
           <h2>Create Comic</h2>
           <form onSubmit={handleSubmit}>
+          <FormField>
+              {errors?.map((err) => (
+                <Error key={err}>{err}</Error>
+              ))}
+            </FormField>
             <FormField>
               <Label htmlFor="title">Title</Label>
               <Input
@@ -127,11 +127,7 @@ const handleSubmit=(e)=>{
                Submit
               </Button>
             </FormField>
-            <FormField>
-              {errors?.map((err) => (
-                <Error key={err}>{err}</Error>
-              ))}
-            </FormField>
+        
           </form>
         </WrapperChild>
      

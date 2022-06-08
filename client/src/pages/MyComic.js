@@ -50,7 +50,7 @@ const {created_comics}= user
        <Button onClick={(e)=>{e.preventDefault()
        fetch(`api/comics/${comic.id}`,{
         method: 'DELETE',
-    }).then(navigate.push('/comics'))}}>delete</Button>
+    }).then(navigate.push('/comics'))}}>Delete Me</Button>
      </div>
     }) :null}
 
