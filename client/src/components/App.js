@@ -10,6 +10,8 @@ import EditCommentPage from "../pages/EditCommentPage";
 import ComicForm from "../components/ComicForm";
 import '../App.css';
 import MyComic from "../pages/MyComic";
+import ComicList from "../pages/ComicList"
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -67,6 +69,10 @@ function App() {
           <Route path='/comic'>
             <MyComic user={user}/>
           </Route>
+          <Route path='/comiclist'>
+            <ComicList comic={comics}/>
+          </Route>
+         
         </Switch>
       </main>
     </>

@@ -1,56 +1,17 @@
-import React, {useState ,useEffect} from "react";
-// import 'bootstrap/dist/css/bootstrap.css'
+import React from 'react'
 import AddToMyPage from "../components/AddToMyPage";
-import styled from "styled-components";
-import ComicList from "../pages/ComicList"
 
-function ComicShowPage({user}) {
-   const [comics,setComics] = useState('')
-   const [allusers, setAllusers] = useState('')
-   const [pub, setPub] = useState('')
- 
-   const [data,setData] = useState('')
-    useEffect(()=>{
-         fetch('/api/comics')
-        .then(res=>res.json())
 
-        .then(r=>setComics(r))
-      },[])
-      useEffect(()=>{
-        fetch('/api/users')
-        .then(res=> res.json())
-        .then(res=> setAllusers(res))
-      },[])
+const ComicList =({comic,user,users})=>{
 
-      const handleSubmit=(e)=>{
-        e.preventDefault()
-        fetch(`/api/search/${pub}`)
-        .then(res=>res.json())
-     
-        .then(res => setData(res))
-    
 
-      }
-      const handleChange=(e)=>{
-        setPub(e.target.value)
-      }
-//
+
+
+
     return(
+        <div>
 
-<Wrapper>
-<WrapperChild>
-
- <form onSubmit={handleSubmit}>
-<input onChange={handleChange} type="text" placeholder="Search By Publisher"/>
-<button>Find me</button>
- </form>
- {/* {data ? data.map((publisher,i)=>{
-   return <div key={i}>{publisher?.name}</div>
- }):null} */}
-         <center>
-         <h1>Browse 100's of Komics</h1>
-         </center>
-   {data ? data.map((c)=>{
+{comic ? comic.map((c)=>{
             const id = c.id
           
  return <div  className="grid-3-columns" key={c.id} >
@@ -72,7 +33,7 @@ function ComicShowPage({user}) {
                                  {c.comments ? c.comments.map(comment=>{
                                   
                                  return <div key={comment.id}>
-                                     {allusers ? allusers.map((data,i)=>{
+                                     {users ? users.map((data,i)=>{
                                        if (comment.user_id === data.id)
                                        return <h4 key={i}>{`${data?.username}'s thoughts`}</h4>
                                      }):null}
@@ -88,23 +49,10 @@ function ComicShowPage({user}) {
         </div>
    </div>
 
-}):<ComicList comic={comics} users={allusers} user={user}/>}   
- </WrapperChild>
-</Wrapper>
+}):null} 
 
+        </div>
     )
 }
-const Wrapper = styled.section`
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 16px;
-  display: flex;
-  gap: 24px;
-`;
 
-const WrapperChild = styled.div`
-  flex: 1;
-`;
-
-export default ComicShowPage
-
+export default ComicList

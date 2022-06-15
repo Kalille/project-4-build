@@ -10,7 +10,7 @@ function NavBar({ user, setUser }) {
     width: '115px',
     padding: '13px',
     margin: '0 6px 6px',
-    background: 'black',
+    background: 'blue',
     textDecoration: 'none',
     color: 'white'
    
@@ -26,7 +26,7 @@ function NavBar({ user, setUser }) {
   return (
   
     <Wrapper>
-      <div style={{fontSize:"35px"}}>{user ? `Welcome Back ${username}`: <Button>sign in</Button>}</div>
+      <div style={{fontSize:"35px",color:"blue"  }}>{user ? `Welcome Back ${username}`: <Button>sign in</Button>}</div>
           <center>
       <Logo>
      

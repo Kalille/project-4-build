@@ -60,9 +60,9 @@ const handleChange=(e)=>{
 
             return(
 <div className="grid-3-columns">
-     <p>{errors?.map(err=>(
+     <div>{errors?.map(err=>(
          <Error key={err}> {err}</Error>
-     ))}</p>
+     ))}</div>
         <center>
     <div className="card mb-3" style={{maxWidth: "100%"}}>
         <div className="row no-gutters">

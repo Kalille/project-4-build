@@ -11,10 +11,12 @@ Rails.application.routes.draw do
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
     # get "/allcomics", to: "comic_apis#search_comics"
-    get "/character", to: "comic_apis#search_characters"
-    get "/allcomics", to: "comic_apis#index"
-    get "/show/:id", to: "comic_apis#show"
-    post "/comments", to: "comments#create"
+    # get "/character", to: "comic_apis#search_characters"
+    # get "/allcomics", to: "comic_apis#index"
+    # get "/show/:id", to: "comic_apis#show"
+    # post "/comments", to: "comments#create"
+    get "search/:publisher", to: "comics#search"
+  
   end
 
   # all other routes will be load our React application
